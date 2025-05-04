@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /private/
+Allow: /
+
+Sitemap: https://datecalculator.yesnomark.com/sitemap.xml

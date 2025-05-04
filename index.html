@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9288770962100185"
+    crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free and easy-to-use online date calculator. Calculate date differences, add or subtract days, find weekdays, and track D-Days. Perfect for planning, scheduling, and productivity. Works for U.S. time zones and English-speaking countries.">
+  <title>Smart Date Calculator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f7f9fc;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #1a73e8;
+    }
+
+    .calculator {
+      background: white;
+      padding: 20px;
+      margin: 20px auto;
+      border-radius: 10px;
+      max-width: 500px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    label, input, select, button {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #1a73e8;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #155ab6;
+    }
+
+    .result {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #2e7d32;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+
+      .calculator {
+        padding: 15px;
+      }
+    }
+
+    .adsense {
+      text-align: center;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Smart Date Calculator</h1>
+
+  <!-- Date Difference Calculator -->
+  <div class="calculator">
+    <h2>Date Difference Calculator</h2>
+    <label for="start">Start Date:</label>
+    <input type="date" id="start" />
+    <label for="end">End Date:</label>
+    <input type="date" id="end" />
+    <button onclick="calculateDiff()">Calculate Difference</button>
+    <div class="result" id="diffResult"></div>
+  </div>
+
+  <!-- Date Add/Subtract Calculator -->
+  <div class="calculator">
+    <h2>Date Add/Subtract Calculator</h2>
+    <label for="baseDate">Base Date:</label>
+    <input type="date" id="baseDate" />
+    <label for="days">Days:</label>
+    <input type="number" id="days" />
+    <select id="operation">
+      <option value="add">Add</option>
+      <option value="subtract">Subtract</option>
+    </select>
+    <button onclick="addSubtractDate()">Calculate</button>
+    <div class="result" id="addSubResult"></div>
+  </div>
+
+  <!-- Weekday Calculator -->
+  <div class="calculator">
+    <h2>Weekday Finder</h2>
+    <label for="weekdayDate">Enter Date:</label>
+    <input type="date" id="weekdayDate" />
+    <button onclick="findWeekday()">Find Day</button>
+    <div class="result" id="weekdayResult"></div>
+  </div>
+
+  <!-- D-Day Calculator -->
+  <div class="calculator">
+    <h2>D-Day Calculator</h2>
+    <label for="dDay">Target Date:</label>
+    <input type="date" id="dDay" />
+    <button onclick="calculateDDay()">Check D-Day</button>
+    <div class="result" id="dDayResult"></div>
+  </div>
+
+  <!-- AdSense Section -->
+  <div class="adsense">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9288770962100185"
+            crossorigin="anonymous"></script>
+    <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-9288770962100185"
+        data-ad-slot="6399153707"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
+  <!-- JavaScript Logic -->
+  <script>
+    function calculateDiff() {
+      const start = new Date(document.getElementById("start").value);
+      const end = new Date(document.getElementById("end").value);
+      const diff = Math.abs(end - start);
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      document.getElementById("diffResult").textContent = `Difference: ${days} day(s)`;
+    }
+
+    function addSubtractDate() {
+      const base = new Date(document.getElementById("baseDate").value);
+      const days = parseInt(document.getElementById("days").value);
+      const op = document.getElementById("operation").value;
+      if (isNaN(days)) {
+        document.getElementById("addSubResult").textContent = "Please enter a valid number of days.";
+        return;
+      }
+      if (op === "add") base.setDate(base.getDate() + days);
+      else base.setDate(base.getDate() - days);
+      document.getElementById("addSubResult").textContent = `Resulting Date: ${base.toDateString()}`;
+    }
+
+    function findWeekday() {
+      const date = new Date(document.getElementById("weekdayDate").value);
+      const options = { weekday: 'long' };
+      const day = date.toLocaleDateString("en-US", options);
+      document.getElementById("weekdayResult").textContent = `That day is a ${day}.`;
+    }
+
+    function calculateDDay() {
+      const today = new Date();
+      const target = new Date(document.getElementById("dDay").value);
+      const diff = Math.floor((target - today) / (1000 * 60 * 60 * 24));
+      if (diff > 0) {
+        document.getElementById("dDayResult").textContent = `D-${diff}`;
+      } else if (diff < 0) {
+        document.getElementById("dDayResult").textContent = `D+${Math.abs(diff)}`;
+      } else {
+        document.getElementById("dDayResult").textContent = "D-Day is today!";
+      }
+    }
+  </script>
+</body>
+</html>
